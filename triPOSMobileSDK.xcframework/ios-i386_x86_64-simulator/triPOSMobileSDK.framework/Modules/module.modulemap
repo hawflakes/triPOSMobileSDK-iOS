@@ -1,0 +1,4 @@
+module triPOSMobileSDK {
+    header "./Headers/triPOSMobileSDK.h"
+    export *
+}
