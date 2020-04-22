@@ -169,3 +169,4 @@ $XCODEBUILD $framework_cmd
 #xcodebuild -create-xcframework -framework iphoneos/triPOSMobileSDK.framework -framework iphonesimulator/triPOSMobileSDK.framework -output triPOSMobileSDK.xcframework
 
 #now, clean up the temp directories
+rm -rf $TEMP_DIR
