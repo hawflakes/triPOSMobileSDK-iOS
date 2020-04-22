@@ -36,6 +36,14 @@ SIMULATOR_ARCHS=(i386 x86_64) #NOTE: zsh arrays created with the parens but you 
 DEVICE_DIR="iphoneos"
 DEVICE_ARCHS=(arm64 armv7) #TODO: make sure these are the only ones
 
+#TODO: pass this in optionally
+MODULEMAP_SRC="resources/module.modulemap"
+
+if [[ -e $MODULEMAP_SRC ]]; then
+  echo "$MODULEMAP_SRC exists. can proceed"
+else
+  error_exit "cannot find $MODULEMAP_SRC. bailing."
+fi
 
 # validate commmand-line
 
@@ -72,7 +80,6 @@ if [[ -e $INPUT_FRAMEWORK ]]; then
 else
   error_exit "no framework found for $INPUT_FRAMEWORK. did you run extract_framework.sh yet?"
 fi
-
 
 
 #preflight checks make sure tools exist
@@ -147,6 +154,19 @@ function extract_framework_and_lipo() {
 
   mv $TARGET_BINARY.temp $TARGET_BINARY
   lipo -info $TARGET_BINARY
+
+  echo "copy modulemap into place"
+  TARGET_MODULE_DIR="$target_dir/$INPUT_FRAMEWORK/Modules"
+
+  if [[ -d $TARGET_MODULE_DIR ]]; then
+    echo "$TARGET_MODULE_DIR exists. no need to create"
+    error_exit "no module map copied. FIXFIX"
+  else
+    echo "creating directory $TARGET_MODULE_DIR"
+    mkdir $TARGET_MODULE_DIR
+    cp $MODULEMAP_SRC $TARGET_MODULE_DIR
+  fi
+
 }
 
 
