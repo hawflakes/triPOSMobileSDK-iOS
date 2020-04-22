@@ -1,8 +1,10 @@
 # triPOSMobileSDK-iOS repository
 This repository holds the triPOSMobileSDK framework for iOS.
 The original is here:
-  https://developer.vantiv.com/docs/DOC-1915?forceNoRedirect=true
-  https://developer.vantiv.com/servlet/JiveServlet/download/1915-35-6683/triPOS+Mobile+SDK+1.6.2.zip
+
+  - [link](https://developer.vantiv.com/docs/DOC-1915?forceNoRedirect=true)
+  - [zipfile](https://developer.vantiv.com/servlet/JiveServlet/download/1915-35-6683/triPOS+Mobile+SDK+1.6.2.zip)
+  
 This version has been modified to work with the Finix POS SDK for iOS. Details follow.
 
 ## Changes to the SDK
@@ -19,4 +21,18 @@ this will create an xcframework out of the shipping binaries
 
 ## tl;dr what to do with a new version
 
-run the script
+- put the zipfile into `zip`
+- update `Makefile` to reference the file:
+	
+	```
+	SDK_ZIPFILE="triPOS Mobile SDK 1.6.2.zip"
+	```
+
+- build the xcframework with:
+	
+	```
+	make ship
+	```
+
+Voila! If successful, an XCFramework will exist in the current directory named `triPOSMobileSDK.xcframework`
+

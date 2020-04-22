@@ -16,6 +16,8 @@ FRAMEWORK="triPOSMobileSDK"
 FRAMEWORK_DIRNAME="$FRAMEWORK.framework"
 
 
+echo "Extract to the current directory"
+
 # spit out error and then exit. if 2 args, 2nd is the error code
 function error_exit () {
   echo "ERROR: $1"
@@ -66,7 +68,6 @@ unzip "$INPUT_ZIPFILE" "$ZIPFILE_FRAMEWORK*" -d "$UNZIP_OUTPUT_DIR"
 mv $UNZIP_OUTPUT_DIR/$ZIPFILE_FRAMEWORK .
 
 
-
 if [[ `basename $ZIPFILE_FRAMEWORK` == $FRAMEWORK_DIRNAME ]]; then
   echo "good. zipfile output dir basename matches framework name"
 else
@@ -75,4 +76,4 @@ fi
 
 
 # now clean up the output
-rm -rf UNZIP_OUTPUT_DIR
+rm -rf $UNZIP_OUTPUT_DIR

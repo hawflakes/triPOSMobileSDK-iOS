@@ -2,7 +2,7 @@ SDK_ZIPFILE="triPOS Mobile SDK 1.6.2.zip"
 
 OUTPUT_FRAMEWORK_DIR=triPOSMobileSDK.framework
 
-.PHONY: clean extract ship 
+.PHONY: clean empty extract ship xcframework
 
 
 clean:
@@ -10,8 +10,13 @@ clean:
 
 # NOTE: this file has spaces so we have to substitute them with an escape sequence. i.e. " " becomes "\ ". icky.
 extract:
-	scripts/convert_framework.sh zip/$(subst ' ', '\ ',$(SDK_ZIPFILE))
+	scripts/extract_framework.sh zip/$(subst ' ', '\ ',$(SDK_ZIPFILE))
 
+xcframework:
+	scripts/create_xcframework.sh triPOSMobileSDK.framework .
 
-ship: clean extract
+empty: clean
+	rm -rf triPOSMobileSDK.xcframework
+
+ship: clean extract xcframework
 	echo "Done"
